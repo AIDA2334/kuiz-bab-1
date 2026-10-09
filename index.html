@@ -1,0 +1,377 @@
+<!DOCTYPE html>
+<html lang="ms">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kuiz Interaktif RBT Tingkatan 1 - Bab 1</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <style>
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background: linear-gradient(135deg, #0f172a 0%, #1e1b4b 50%, #311042 100%);
+            min-height: 100vh;
+        }
+        .font-fredoka {
+            font-family: 'Fredoka', cursive;
+        }
+        .glass-card {
+            background: rgba(30, 41, 59, 0.75);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid rgba(255, 255, 255, 0.125);
+        }
+        .glow-gold {
+            box-shadow: 0 0 25px rgba(234, 179, 8, 0.4);
+        }
+        .custom-scrollbar::-webkit-scrollbar {
+            width: 8px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-track {
+            background: rgba(15, 23, 42, 0.6);
+            border-radius: 10px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+            background: rgba(99, 102, 241, 0.5);
+            border-radius: 10px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb:hover {
+            background: rgba(99, 102, 241, 0.8);
+        }
+    </style>
+</head>
+<body class="text-gray-100 flex flex-col min-h-screen relative overflow-x-hidden">
+
+    <!-- Header App -->
+    <header class="w-full glass-card sticky top-0 z-40 px-4 py-3 border-b border-slate-700/50">
+        <div class="max-w-5xl mx-auto flex justify-between items-center">
+            <div class="flex items-center gap-3 cursor-pointer" onclick="goHome()">
+                <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-indigo-500 to-purple-500 flex items-center justify-center font-bold text-white shadow-lg text-xl">
+                    <i class="fa-solid fa-compass-drafting"></i>
+                </div>
+                <div>
+                    <h1 class="font-fredoka text-lg md:text-xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-indigo-300 via-purple-300 to-pink-300">RBT T1: BAB 1</h1>
+                    <p class="text-xs text-slate-400 hidden sm:block">Pengenalan kepada Reka Bentuk dan Teknologi</p>
+                </div>
+            </div>
+            
+            <div class="flex items-center gap-2">
+                <button onclick="showLeaderboardScreen()" class="px-3 py-1.5 rounded-xl bg-slate-800 hover:bg-slate-700 border border-slate-600 text-xs md:text-sm font-semibold flex items-center gap-2 transition text-amber-400">
+                    <i class="fa-solid fa-trophy text-amber-400"></i>
+                    <span>Papan Kedudukan</span>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Container -->
+    <main class="flex-1 max-w-5xl w-full mx-auto p-4 md:p-6 flex flex-col justify-center">
+
+        <!-- 1. HALAMAN UTAMA / PENDAFTARAN -->
+        <div id="screen-welcome" class="space-y-6">
+            <div class="glass-card rounded-3xl p-6 md:p-10 text-center relative overflow-hidden">
+                <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-indigo-500/10 border border-indigo-500/30 text-indigo-300 text-xs font-semibold mb-4">
+                    <i class="fa-solid fa-graduation-cap"></i> Modul Pembelajaran RBT Tingkatan 1
+                </div>
+
+                <h1 class="text-3xl md:text-5xl font-extrabold font-fredoka text-white mb-3">
+                    Cabaran Kuiz <span class="bg-clip-text text-transparent bg-gradient-to-r from-amber-400 via-pink-400 to-indigo-400">RBT Bab 1</span>
+                </h1>
+                <p class="text-slate-300 max-w-2xl mx-auto text-sm md:text-base mb-8">
+                    Uji kefahaman anda dalam <strong>Pengenalan kepada Reka Bentuk dan Teknologi</strong> (50 Soalan lengkap).
+                </p>
+
+                <!-- Box Input Nama -->
+                <div class="max-w-md mx-auto bg-slate-900/80 p-6 rounded-2xl border border-slate-700 shadow-xl space-y-4">
+                    <label class="block text-left text-xs font-semibold uppercase tracking-wider text-slate-400">
+                        <i class="fa-solid fa-user-pen text-indigo-400 mr-1"></i> Masukkan Nama Pemain:
+                    </label>
+                    <input type="text" id="player-name-input" placeholder="Contoh: Aiman Firdaus" class="w-full px-4 py-3 rounded-xl bg-slate-800 border border-slate-600 text-white placeholder-slate-500 focus:outline-none focus:border-indigo-500 transition">
+                    <p id="name-error" class="text-rose-400 text-xs text-left hidden"><i class="fa-solid fa-triangle-exclamation"></i> Sila masukkan nama anda sebelum bermula!</p>
+
+                    <button type="button" onclick="startQuiz()" class="w-full py-4 rounded-xl bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 hover:from-indigo-600 hover:to-pink-600 font-bold text-white text-lg shadow-lg transition flex items-center justify-center gap-2 cursor-pointer">
+                        <span>MULA KUIZ SEKARANG</span>
+                        <i class="fa-solid fa-play"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- 2. HALAMAN KUIZ -->
+        <div id="screen-quiz" class="hidden space-y-4">
+            <div class="glass-card p-4 rounded-2xl flex flex-wrap justify-between items-center gap-3">
+                <div class="flex items-center gap-3">
+                    <span class="px-3 py-1 bg-indigo-500/20 text-indigo-300 border border-indigo-500/40 rounded-lg text-xs font-bold" id="quiz-section-badge">Bahagian A</span>
+                    <span class="text-sm font-semibold text-slate-200" id="quiz-progress-text">Soalan 1 / 50</span>
+                </div>
+                
+                <div class="flex items-center gap-4">
+                    <div class="flex items-center gap-1.5 text-xs font-mono bg-slate-900/80 px-3 py-1.5 rounded-lg border border-slate-700 text-amber-300">
+                        <i class="fa-regular fa-clock text-amber-400"></i>
+                        <span id="quiz-timer">00:00</span>
+                    </div>
+                    <div class="text-xs text-slate-400 flex items-center gap-1.5">
+                        <i class="fa-solid fa-user text-purple-400"></i>
+                        <span id="quiz-player-display" class="font-semibold text-slate-200">Pemain</span>
+                    </div>
+                </div>
+
+                <div class="w-full bg-slate-800 h-2 rounded-full overflow-hidden">
+                    <div id="quiz-progress-bar" class="bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 h-full w-0 transition-all duration-300"></div>
+                </div>
+            </div>
+
+            <div class="glass-card rounded-2xl p-6 md:p-8 space-y-6 relative">
+                <div class="flex justify-between items-center text-xs">
+                    <span id="question-level-tag" class="px-2.5 py-1 rounded-md font-semibold bg-slate-700 text-slate-300">Aras: Sederhana</span>
+                    <span id="question-topic-tag" class="text-slate-400 font-medium">Topik: Elemen Reka Bentuk</span>
+                </div>
+
+                <div id="question-text" class="text-base md:text-lg font-semibold text-white leading-relaxed"></div>
+
+                <div id="question-options-container" class="space-y-3 pt-2"></div>
+
+                <div class="flex justify-between items-center pt-4 border-t border-slate-700/60">
+                    <button id="btn-prev" onclick="prevQuestion()" class="px-4 py-2 rounded-xl bg-slate-800 hover:bg-slate-700 border border-slate-600 text-sm font-semibold text-slate-300 disabled:opacity-40 disabled:cursor-not-allowed transition flex items-center gap-2">
+                        <i class="fa-solid fa-chevron-left"></i> Sebelum
+                    </button>
+                    
+                    <button id="btn-next" onclick="nextQuestion()" class="px-5 py-2.5 rounded-xl bg-indigo-600 hover:bg-indigo-500 text-sm font-bold text-white shadow-lg transition flex items-center gap-2">
+                        <span>Seterusnya</span> <i class="fa-solid fa-chevron-right"></i>
+                    </button>
+
+                    <button id="btn-submit-quiz" onclick="confirmSubmitQuiz()" class="hidden px-6 py-2.5 rounded-xl bg-gradient-to-r from-emerald-500 to-teal-600 hover:from-emerald-600 hover:to-teal-700 text-sm font-bold text-white shadow-lg transition flex items-center gap-2">
+                        <i class="fa-solid fa-paper-plane"></i> <span>HANTAR JAWAPAN</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- 3. HALAMAN KEPUTUSAN -->
+        <div id="screen-result" class="hidden space-y-6">
+            <div class="glass-card rounded-3xl p-6 md:p-10 text-center space-y-6">
+                <h1 id="result-player-name" class="text-3xl md:text-4xl font-extrabold font-fredoka text-white">Nama Pemain</h1>
+
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-4 max-w-2xl mx-auto">
+                    <div class="bg-slate-900/90 border border-slate-700 p-5 rounded-2xl">
+                        <span class="text-xs text-slate-400 font-semibold uppercase">Markah</span>
+                        <div class="text-3xl font-extrabold text-amber-400 mt-1 font-fredoka" id="result-score-text">0 / 50</div>
+                    </div>
+                    <div class="bg-slate-900/90 border border-slate-700 p-5 rounded-2xl">
+                        <span class="text-xs text-slate-400 font-semibold uppercase">Peratusan</span>
+                        <div class="text-3xl font-extrabold text-indigo-400 mt-1 font-fredoka" id="result-percentage-text">0%</div>
+                    </div>
+                    <div class="bg-slate-900/90 border border-slate-700 p-5 rounded-2xl">
+                        <span class="text-xs text-slate-400 font-semibold uppercase">Masa</span>
+                        <div class="text-2xl font-bold text-emerald-400 mt-1 font-mono" id="result-time-text">00:00</div>
+                    </div>
+                </div>
+
+                <div class="flex flex-wrap justify-center gap-4 pt-4">
+                    <button onclick="showLeaderboardScreen()" class="px-6 py-3 rounded-xl bg-gradient-to-r from-amber-500 to-orange-500 hover:from-amber-600 font-bold text-slate-950 transition flex items-center gap-2">
+                        <i class="fa-solid fa-trophy"></i> <span>PAPAM KEDUDUKAN</span>
+                    </button>
+                    <button onclick="restartQuiz()" class="px-6 py-3 rounded-xl bg-slate-800 hover:bg-slate-700 border border-slate-600 text-indigo-300 font-semibold transition flex items-center gap-2">
+                        <i class="fa-solid fa-rotate-right"></i> <span>CUBA LAGI</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- 4. HALAMAN PAPAN KEDUDUKAN -->
+        <div id="screen-leaderboard" class="hidden space-y-6">
+            <div class="glass-card rounded-3xl p-6 md:p-8 space-y-6">
+                <div class="flex justify-between items-center border-b border-slate-700/60 pb-4">
+                    <h2 class="text-2xl font-extrabold font-fredoka text-white flex items-center gap-2">
+                        <i class="fa-solid fa-trophy text-amber-400"></i> PAPAN KEDUDUKAN
+                    </h2>
+                    <button onclick="goHome()" class="px-4 py-2 rounded-xl bg-indigo-600 text-white text-xs font-bold">
+                        <i class="fa-solid fa-house mr-1"></i> UTAMA
+                    </button>
+                </div>
+
+                <div class="overflow-x-auto rounded-2xl border border-slate-700 bg-slate-900/70">
+                    <table class="w-full text-left text-xs md:text-sm text-slate-300">
+                        <thead class="bg-slate-800 text-slate-400 uppercase text-[11px]">
+                            <tr>
+                                <th class="py-3 px-4 text-center">#</th>
+                                <th class="py-3 px-4">Nama</th>
+                                <th class="py-3 px-4 text-center">Markah</th>
+                                <th class="py-3 px-4 text-center">Peratus</th>
+                                <th class="py-3 px-4 text-center">Masa</th>
+                            </tr>
+                        </thead>
+                        <tbody id="leaderboard-table-body" class="divide-y divide-slate-800"></tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+    </main>
+
+    <script>
+        const quizData = [
+            { id: 1, section: 'A', level: 'Mudah', topic: 'Definisi Reka Bentuk', question: 'Apakah maksud "Reka Bentuk"?', options: ['A. Penggunaan pengetahuan sains', 'B. Penyusunan bahan secara terancang untuk menghasilkan produk', 'C. Proses memasarkan produk', 'D. Aktiviti melukis seni tanpa tujuan'], answer: 1, explanation: 'Penyusunan bahan secara terancang.' },
+            { id: 2, section: 'A', level: 'Mudah', topic: 'Definisi Teknologi', question: 'Apakah maksud "Teknologi"?', options: ['A. Pengaplikasian ilmu sains dan matematik', 'B. Penghasilan perhiasan rumah', 'C. Kaedah melukis manual', 'D. Proses jualan barangan'], answer: 0, explanation: 'Aplikasi sains dan matematik.' },
+            { id: 3, section: 'A', level: 'Mudah', topic: 'Elemen Reka Bentuk', question: 'Antara berikut, yang manakah BUKAN Elemen Reka Bentuk?', options: ['A. Garisan', 'B. Warna', 'C. Keseimbangan', 'D. Rupa'], answer: 2, explanation: 'Keseimbangan ialah PRINSIP reka bentuk.' }
+        ];
+
+        let currentPlayerName = "";
+        let currentQuestionIndex = 0;
+        let userAnswers = {};
+        let timeInSeconds = 0;
+        let timerInterval = null;
+
+        function startQuiz() {
+            const input = document.getElementById("player-name-input");
+            const name = input.value.trim();
+            const errEl = document.getElementById("name-error");
+
+            if (!name) {
+                errEl.classList.remove("hidden");
+                return;
+            }
+            errEl.classList.add("hidden");
+
+            currentPlayerName = name;
+            currentQuestionIndex = 0;
+            userAnswers = {};
+            timeInSeconds = 0;
+
+            document.getElementById("quiz-player-display").innerText = currentPlayerName;
+
+            switchScreen("screen-quiz");
+            startTimer();
+            renderQuestion();
+        }
+
+        function switchScreen(screenId) {
+            ['screen-welcome', 'screen-quiz', 'screen-result', 'screen-leaderboard'].forEach(id => {
+                document.getElementById(id).classList.toggle("hidden", id !== screenId);
+            });
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        function goHome() {
+            stopTimer();
+            switchScreen("screen-welcome");
+        }
+
+        function startTimer() {
+            stopTimer();
+            timeInSeconds = 0;
+            timerInterval = setInterval(() => {
+                timeInSeconds++;
+                const mins = Math.floor(timeInSeconds / 60).toString().padStart(2, '0');
+                const secs = (timeInSeconds % 60).toString().padStart(2, '0');
+                document.getElementById("quiz-timer").innerText = `${mins}:${secs}`;
+            }, 1000);
+        }
+
+        function stopTimer() {
+            if (timerInterval) clearInterval(timerInterval);
+        }
+
+        function renderQuestion() {
+            const q = quizData[currentQuestionIndex];
+            const total = quizData.length;
+
+            document.getElementById("quiz-progress-text").innerText = `Soalan ${currentQuestionIndex + 1} / ${total}`;
+            document.getElementById("quiz-section-badge").innerText = `Bahagian ${q.section}`;
+            document.getElementById("question-level-tag").innerText = `Aras: ${q.level}`;
+            document.getElementById("question-topic-tag").innerText = `Topik: ${q.topic}`;
+            document.getElementById("question-text").innerText = `${q.id}. ${q.question}`;
+
+            const optionsContainer = document.getElementById("question-options-container");
+            optionsContainer.innerHTML = "";
+
+            const selectedVal = userAnswers[q.id];
+
+            q.options.forEach((opt, idx) => {
+                const isSelected = selectedVal === idx;
+                const btn = document.createElement("button");
+                btn.type = "button";
+                btn.className = `w-full text-left p-4 rounded-xl border transition flex items-center justify-between font-medium ${
+                    isSelected ? 'bg-indigo-600/30 border-indigo-500 text-white' : 'bg-slate-800 border-slate-700 text-slate-200'
+                }`;
+                btn.onclick = () => {
+                    userAnswers[q.id] = idx;
+                    renderQuestion();
+                };
+                btn.innerHTML = `<span>${opt}</span>`;
+                optionsContainer.appendChild(btn);
+            });
+
+            document.getElementById("btn-prev").disabled = (currentQuestionIndex === 0);
+            document.getElementById("btn-next").classList.toggle("hidden", currentQuestionIndex === total - 1);
+            document.getElementById("btn-submit-quiz").classList.toggle("hidden", currentQuestionIndex !== total - 1);
+        }
+
+        function prevQuestion() {
+            if (currentQuestionIndex > 0) {
+                currentQuestionIndex--;
+                renderQuestion();
+            }
+        }
+
+        function nextQuestion() {
+            if (currentQuestionIndex < quizData.length - 1) {
+                currentQuestionIndex++;
+                renderQuestion();
+            }
+        }
+
+        function confirmSubmitQuiz() {
+            stopTimer();
+            let correct = 0;
+            quizData.forEach(q => {
+                if (userAnswers[q.id] === q.answer) correct++;
+            });
+
+            const scorePct = Math.round((correct / quizData.length) * 100);
+            document.getElementById("result-player-name").innerText = currentPlayerName;
+            document.getElementById("result-score-text").innerText = `${correct} / ${quizData.length}`;
+            document.getElementById("result-percentage-text").innerText = `${scorePct}%`;
+            
+            saveScore({ name: currentPlayerName, score: correct, total: quizData.length, percentage: scorePct, time: timeInSeconds });
+            switchScreen("screen-result");
+        }
+
+        function saveScore(data) {
+            let scores = JSON.parse(localStorage.getItem("rbt_scores") || "[]");
+            scores.push(data);
+            scores.sort((a, b) => b.score - a.score || a.time - b.time);
+            localStorage.setItem("rbt_scores", JSON.stringify(scores));
+        }
+
+        function showLeaderboardScreen() {
+            switchScreen("screen-leaderboard");
+            const tbody = document.getElementById("leaderboard-table-body");
+            tbody.innerHTML = "";
+            let scores = JSON.parse(localStorage.getItem("rbt_scores") || "[]");
+            
+            scores.forEach((s, idx) => {
+                const mins = Math.floor(s.time / 60).toString().padStart(2, '0');
+                const secs = (s.time % 60).toString().padStart(2, '0');
+                const row = `<tr>
+                    <td class="py-3 px-4 text-center font-bold">${idx + 1}</td>
+                    <td class="py-3 px-4">${s.name}</td>
+                    <td class="py-3 px-4 text-center font-bold text-amber-400">${s.score}/${s.total}</td>
+                    <td class="py-3 px-4 text-center">${s.percentage}%</td>
+                    <td class="py-3 px-4 text-center font-mono">${mins}:${secs}</td>
+                </tr>`;
+                tbody.innerHTML += row;
+            });
+        }
+
+        function restartQuiz() {
+            startQuiz();
+        }
+    </script>
+</body>
+</html>
